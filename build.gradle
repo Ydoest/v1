@@ -1,14 +1,13 @@
+// plugins块用于引入Gradle插件，这里引入了Java、Spring Boot和Spring依赖管理插件
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.6'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
-repositories {
-    maven { url 'https://maven.aliyun.com/repository/public' }
-    maven { url 'https://maven.aliyun.com/repository/google' }
-    mavenCentral()
-}
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
 // 配置各个子模块的依赖
 subprojects {
@@ -18,12 +17,21 @@ subprojects {
 
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
         mavenCentral()
     }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter' // 添加Spring Boot启动器依赖
-        testImplementation 'org.springframework.boot:spring-boot-starter-test' // 添加Spring Boot测试启动器依赖
+        // 添加Spring Boot启动器依赖
+        implementation 'org.springframework.boot:spring-boot-starter'
+        // 添加Spring Boot测试启动器依赖
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        compileOnly 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 }

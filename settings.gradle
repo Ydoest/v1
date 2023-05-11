@@ -1,2 +1,3 @@
 rootProject.name = 'v1'
 include 'springboot-base'
+include 'springboot-mongodb'
